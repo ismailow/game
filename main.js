@@ -20,7 +20,7 @@ const enemyPosition = {
     y: enemy.getBoundingClientRect().y,
     top: enemy.getBoundingClientRect().top,
     left: enemy.getBoundingClientRect().left,
-    bottom: enemy.getBoundingClientRect().bottom,
+    bottom: enemy.getBoundingClientRect().bottom = 0,
     right: enemy.getBoundingClientRect().right,
 }
 
@@ -48,6 +48,12 @@ document.addEventListener('keydown', (event) => {
         case('ArrowUp'):{
             heroPosition.bottom += 70;
             hero.style.bottom = `${heroPosition.bottom}px`;
+
+            if(heroPosition.bottom >= 70){
+
+            }
+
+            //! Возврат в исходную точку
             setTimeout(() => {
                 heroPosition.bottom -= 70;
                 hero.style.bottom = `${heroPosition.bottom}px`
@@ -57,7 +63,36 @@ document.addEventListener('keydown', (event) => {
     };
 
     //! Проигрыш при столкновении с врагом
-    if(heroPosition.right >= enemyPosition.left && heroPosition.left <= enemyPosition.right && heroPosition.top === enemyPosition.top){
+    if(heroPosition.right >= enemyPosition.left && heroPosition.left <= enemyPosition.right && heroPosition.bottom === enemyPosition.bottom){
         alert('lose');
     };
 });
+
+
+const move = (func, ...args) => {
+    const pressedKeys = [];
+
+    document.addEventListener('keydown', (event) => {
+        if(event.repeat) return;
+        pressedKeys.push(event.code);
+        console.log();
+    });
+
+    document.addEventListener('keyup', (event) => {
+        if(pressedKeys.length === 0) return;
+
+        let runFunc = true;
+        for(let arg of args){
+            if(!pressedKeys.includes(arg)){
+                runFunc = false;
+                break;
+            };
+        };
+
+        if(runFunc){
+            func();
+        };
+
+        pressedKeys.length = 0;
+    })
+}
