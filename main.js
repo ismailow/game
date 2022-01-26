@@ -67,32 +67,3 @@ document.addEventListener('keydown', (event) => {
         alert('lose');
     };
 });
-
-
-const move = (func, ...args) => {
-    const pressedKeys = [];
-
-    document.addEventListener('keydown', (event) => {
-        if(event.repeat) return;
-        pressedKeys.push(event.code);
-        console.log();
-    });
-
-    document.addEventListener('keyup', (event) => {
-        if(pressedKeys.length === 0) return;
-
-        let runFunc = true;
-        for(let arg of args){
-            if(!pressedKeys.includes(arg)){
-                runFunc = false;
-                break;
-            };
-        };
-
-        if(runFunc){
-            func();
-        };
-
-        pressedKeys.length = 0;
-    })
-}
