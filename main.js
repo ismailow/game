@@ -3,6 +3,7 @@ const hero = document.querySelector('#person');
 const enemy = document.querySelector('#enemy');
 //! Размер шага
 let step = 10;
+let jumpCounter = 0; //! Счетчик прыжков
 
 //! Координаты персонажа
 const heroPosition = {
@@ -46,18 +47,21 @@ document.addEventListener('keydown', (event) => {
 
         //! Прыжок
         case('ArrowUp'):{
-            heroPosition.bottom += 70;
-            hero.style.bottom = `${heroPosition.bottom}px`;
 
-            if(heroPosition.bottom >= 70){
+            //! Прыжок если до этого не было прыжка
+            if(jumpCounter === 0){
+                jumpCounter += 1; //! Обновление счетчика
+                heroPosition.bottom += 70;
+                hero.style.bottom = `${heroPosition.bottom}px`;
+                console.log(jumpCounter);
 
+                //! Возврат в исходную точку
+                setTimeout(() => {
+                    heroPosition.bottom -= 70;
+                    hero.style.bottom = `${heroPosition.bottom}px`;
+                    jumpCounter = 0; //! Обнуление счетчика
+                }, 1000);
             }
-
-            //! Возврат в исходную точку
-            setTimeout(() => {
-                heroPosition.bottom -= 70;
-                hero.style.bottom = `${heroPosition.bottom}px`
-            }, 1000)
             break;
         }
     };
