@@ -1,0 +1,43 @@
+*, *::before, *::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.game-field{
+    position: relative;
+    min-height: calc(100vh - 100px);
+}
+
+#person{
+    position: absolute;
+    bottom: 0;
+    /* z-index: 100; */
+    width: 35px;
+    height: 55px;
+    background: url('/hero.png') 0 0 no-repeat;
+    background-size: 100%;
+    object-fit: cover;
+    transition: all cubic-bezier(0.075, 0.82, 0.165, 1) .4s;
+    -webkit-transition: all cubic-bezier(0.075, 0.82, 0.165, 1) .4s;
+    -moz-transition: all cubic-bezier(0.075, 0.82, 0.165, 1) .4s;
+    -ms-transition: all cubic-bezier(0.075, 0.82, 0.165, 1) .4s;
+    -o-transition: all cubic-bezier(0.075, 0.82, 0.165, 1) .4s;
+}
+
+#enemy{
+    position: absolute;
+    bottom: 0;
+    left: 400px;
+    width: 35px;
+    height: 55px;
+    background-color: #f00;
+}
+
+#platform{
+    background-color: black;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+}
